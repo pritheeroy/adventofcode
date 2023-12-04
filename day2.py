@@ -32,6 +32,31 @@ def day2_part1(string, count):
     return output
 
 
+def day2_part2(string):
+    lines = string.split('\n')
+    pattern = r"(\d+) (\w+)"
+    output = 0
+
+    for line in lines:
+        if not line:
+            continue
+
+        segments = line.split(";")
+        max_values = defaultdict(int)
+
+        for segment in segments:
+            pairs = re.findall(pattern, segment)
+            for number, color in pairs:
+                max_values[color] = max(max_values[color], int(number))
+
+        power = 1
+        for color, max_val in max_values.items():
+            power *= max_val
+
+        output += power
+
+    return output
+
 if __name__ == "__main__":
     count = {"red": 12,
              "green": 13,
@@ -143,6 +168,7 @@ Game 3: 8 green, 6 blue, 20 red; 5 blue, 4 red, 13 green; 5 green, 1 red
 Game 4: 1 green, 3 red, 6 blue; 3 green, 6 red; 3 green, 15 blue, 14 red
 Game 5: 6 red, 1 blue, 3 green; 2 blue, 1 red, 2 green"""
     print(day2_part1(string, count))
+    print(day2_part2(string))
 
 
 
