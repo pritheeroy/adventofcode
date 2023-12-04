@@ -1,4 +1,3 @@
-import sys
 import re
 def day1_part1(input_string):
     lines = input_string.split('\n')
